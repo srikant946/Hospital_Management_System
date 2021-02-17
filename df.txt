@@ -1,0 +1,28 @@
+<div class="appointments">
+			
+				<!-- Appointment List -->
+				<div class="appointment-list">
+					<div class="profile-info-widget">
+						<a href="patient-profile.html" class="booking-doc-img">
+							<img src="assets/img/patients/<?php echo $patient_row["image_name"]; ?>.jpg" alt="User Image">
+						</a>
+						<div class="profile-det-info">
+							<h3><a href="patient-profile.html"><?php echo $patient_row["patient_name"]; ?> </a></h3>
+							<div class="patient-details">
+								<h5><i class="far fa-clock"></i> <?php echo "$date $time " ?></h5>
+								<h5><i class="fas fa-map-marker-alt"></i><?php echo $patient_row["patient_address"]; ?> </h5>
+								<h5><i class="fas fa-envelope"></i><?php echo $patient_row["patient_email"]; ?></h5>
+								<h5 class="mb-0"><i class="fas fa-phone"></i><?php echo $patient_row["patient_contact_no"]; ?></h5>
+							</div>
+						</div>
+					</div>
+					<div class="appointment-action">
+						<a href="#" class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details" onclick="display_data('<?php echo $row["id"]  ?>','<?php echo $row["consultancyFees"] ?>','<?php echo "$date $time " ?>')" >
+						<i class="far fa-eye"></i> View
+						</a>	
+					</div>
+				</div>
+					<!-- /Appointment List -->
+				</div>
+
+						

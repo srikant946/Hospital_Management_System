@@ -1,0 +1,89 @@
+<?php
+							            // Storing the Session Variable that was declared in 'doc-login.php' in Another variable
+							            $pt_inv_id = $_SESSION['p_id'];
+							            // var_dump($pt_inv_id);
+							            $sql=mysqli_query($conn,"select * from invoice_tbl where patient_id = '$pt_inv_id'");
+							            $cnt=1;
+							            while($row=mysqli_fetch_array($sql))
+							            {
+							            ?>
+
+                                        <?php 
+								$cnt=$cnt+1;
+ 								}?>
+
+// Scenario of fetching Data that lies in another table via a Column Value from the Current table
+// Matlab mujhe aisa data display karna hai jo dusre table me hai par uske liye mujhe uss (dusre) table ke kisi column ka value chahiye
+// Here, mujhe Doctor name chahiye which is in doctor table and doctor_id is the common column, so firstly doctor_id would be fetched from the invoice table when the logged in Patient's id is EQUAL to the Patient id Data stored in DB
+// Doctor ID's jo uss patient_id ke corresponding hai woh mil jaegi using $row1['doctor_id']
+// Abhi iss data ko 'doctor' table ke doctor_id ke saath compare karege aur uske through doctor name mil jaega
+// But isse double data aayega..lyk 2 times name fetch hoga kyuki $sql1 ek baar karega aur $sql2 ek baar karega
+// Hence $sql1 hata diya
+
+                                                               <?php
+                                                                        $sql1 = mysqli_query($conn,"select doctor_id from invoice_tbl where patient_id = $row[patient_id] ");
+                                                                        
+                                                                        $cnt1 = 1;
+                                                                        while($row1 = mysqli_fetch_array($sql1))
+							                                            { 
+                                                                            // var_dump($row1['doctor_id']);
+
+                                                                        ?>
+
+                                                                        <?php
+                                                               $cnt1 = $cnt1+1;     
+                                                                }
+                                                                    ?>
+
+                                                                    <?php
+                                                                        $sql2 = mysqli_query($conn,"select * from doctor_tbl where doctor_id = $row[doctor_id] ");
+                                                                        
+                                                                        $cnt2 = 1;
+                                                                        while($row2 = mysqli_fetch_array($sql2))
+							                                            {
+                                                                            // var_dump($row2['doctor_name']);
+                                                                        ?>
+
+                                                                        <h2 class="table-avatar">
+                                                                            <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
+                                                                                <img class="avatar-img rounded-circle" src="assets/img/doctors/<?php echo $row2["doctor_image_name"]; ?>.jpg" alt="User Image">
+																			</a>
+																			<a href="doctor-profile.html"><?php echo $row2['doctor_name'];?><span><?php echo $row2['doctor_id'];?></span></a>
+                                                                        </h2>
+                                                                        
+                                                                        <?php
+                                                                        $cnt2 = $cnt2 +1;    
+                                                                        }
+                                                                        ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                        <?php
+			// Storing the Session Variable that was declared in 'doc-login.php' in Another variable
+			$inv_id = $_SESSION['invo_id'];
+			var_dump($inv_id);
+			$pt_inv_id = $_SESSION['p_id'];
+			// var_dump($pt_inv_id);
+			$sql=mysqli_query($conn,"select * from invoice_tbl where patient_id = '$pt_inv_id'");
+                                      
+                                        $cnt=1;
+                                        
+			while($row=mysqli_fetch_array($sql))
+			{
+			?>
+
+
+
+            														<td><span><?php $subtotal = $row['amount']; echo $subtotal + ($subtotal*0.05); $subtotal = $subtotal + ($subtotal*0.05); ?></span></td>
+														<td><span><?php echo $subtotal - ($subtotal*0.1); ?></span></td>
